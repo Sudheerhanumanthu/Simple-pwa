@@ -3,7 +3,7 @@ const urlsToCache = [
   './',
   './index.html',
   './manifest.json',
-  './icon.png'
+  './https://i.ibb.co/V6tRbh9/Lamborghini-Wallpaper.jpg'
 ];
 
 // Install
