@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simple Counter PWA</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon.png" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 2em;
+    }
+    button {
+      font-size: 1.2em;
+      padding: 10px 20px;
+      margin-top: 1em;
+    }
+    p {
+      font-size: 2em;
+    }
+  </style>
+</head>
+<body>
+  <h1>Simple Counter PWA</h1>
+  <p id="count">0</p>
+  <button id="btn">Increase</button>
+
+  <script>
+    let count = 0;
+    const el = document.getElementById('count');
+    document.getElementById('btn').onclick = () => {
+      count++;
+      el.textContent = count;
+      localStorage.setItem('count', count);
+    };
+
+    // Load count on page load
+    window.addEventListener('load', () => {
+      const saved = localStorage.getItem('count');
+      if (saved) {
+        count = parseInt(saved, 10);
+        el.textContent = count;
+      }
+    });
+
+    // Register service worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('Service Worker registered'))
+        .catch(err => console.log('Service Worker registration failed', err));
+    }
+  </script>
+</body>
+</html>
